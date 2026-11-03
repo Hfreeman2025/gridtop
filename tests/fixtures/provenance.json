@@ -1,0 +1,13 @@
+{
+  "source": "National Grid ESO / NESO Carbon Intensity API",
+  "licence": "CC BY 4.0",
+  "snapshot_saved_at": "2026-11-01T10:55:05.517252+00:00",
+  "files_saved_at": {
+    "postcode.json": "2026-11-01T10:55:05.517252+00:00",
+    "intensity.json": "2026-11-01T10:54:51.896012+00:00",
+    "generation.json": "2026-11-01T10:54:52.097260+00:00",
+    "forecast.json": "2026-11-01T10:54:52.813225+00:00",
+    "regional.json": "2026-11-01T10:54:54.228489+00:00"
+  },
+  "note": "Public responses saved on 1 Nov 2026. Settlement timestamps are in each payload. No timestamps were shifted."
+}

@@ -1,0 +1,28 @@
+                                      
+ gridtop   /   Generation             
+                                      
+ ──────────────────────────────────── 
+                                      
+ 165 gCO₂/kWh · moderate              
+ Great Britain                        
+ 10:00–10:30 UTC                      
+ RECORDING · 1 Nov 2026               
+                                      
+                                      
+     ⢀⣀⣀⡀  ⠢⡀  ⡀               ⠠⠤⠄    
+       ⡜    ⠸⡖⠉ ⠠⠤⠤⠤⠤                 
+     ⠒⠊⣧    ⢰⡇   ⢰        ⢀⣴⣠⡀        
+       ⡇⠁   ⠈⡇  ⢀⢼⠤⡀      ⢒⣇⣸⡂    ⢀⠄  
+  ⣀⡠⠤⠤⢼⡧⠤⢤⣀⡀⢸⡇   ⢸    ⡀ ⡀  ⠛⠘   ⣴⡟⠃   
+ ⠋⠁   ⢸⡇   ⠉⢹⡏⠑⠒⠋⢹⡏⠉⠉⢛⡷⠲⡷⣄⣀  ⢠⠤⢼⣿⡧⢴⠚⠉ 
+ ⠒⠚⠉⠉⠉⠉⠑⠒⠒⠒⠒⠚⠣⠤⠤⠤⢼⣃⣀⣀⣸⡇ ⠇ ⠈⠉⠉⠛⠉⠙⣛⣃⣘⣀⣀ 
+ ⠂⠂⠂⠒⠒⠒⠒⠒⠐⠐⠐⠐⠒⠒⠒⠒⠂⠂⠂⠂⠒⠚⠛⠛⠛⠙⠙⠙⠛⠛⠛⠓⠂⠂⠂⠂ 
+ Wind 10% · Solar 12% · Gas 33%       
+                                      
+ Cleanest 2h · 63 g/kWh               
+ 02 Nov 03:30–05:30 UTC               
+                                      
+                                      
+ NESO / Carbon Intensity · CC BY 4.0  
+ q quit  ? help  m map  space motion  
+                                      

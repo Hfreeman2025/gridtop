@@ -1,0 +1,300 @@
+{
+  "help": "https://api.neso.energy/api/3/action/help_show?name=package_search",
+  "success": true,
+  "result": {
+    "count": 1,
+    "sort": "score desc, metadata_modified desc",
+    "facets": {},
+    "results": [
+      {
+        "license_title": "NESO Open Data Licence",
+        "maintainer": "",
+        "relationships_as_object": [],
+        "private": false,
+        "maintainer_email": "",
+        "num_tags": 14,
+        "id": "0e377f16-95e9-4c15-a1fc-49e06a39cfa0",
+        "metadata_created": "2020-05-07T07:33:52.213513",
+        "metadata_modified": "2026-03-16T13:23:37.786756",
+        "author": "National Energy System Operator",
+        "author_email": "",
+        "state": "active",
+        "version": "20240503",
+        "creator_user_id": "a5f13177-b398-4489-9e34-0447dc6a2dab",
+        "type": "dataset",
+        "resources": [
+          {
+            "mimetype": "application/zip",
+            "cache_url": null,
+            "name": "GB DNO Licence Areas 20200506 with ESRI Shape File",
+            "hash": "",
+            "description": "The GIS boundaries for DNO Licence Areas in ESRI Shapefile format. The shapefile uses the following Coordinate Reference System (CRS): EPSG:27700 - OSGB 1936 / British National Grid - Projected.",
+            "metadata_modified": "2024-11-04T17:09:43.669088",
+            "cache_last_updated": null,
+            "url": "https://api.neso.energy/dataset/0e377f16-95e9-4c15-a1fc-49e06a39cfa0/resource/46a7b674-49f9-4ad6-b778-df48f6736222/download/dno_license_areas_20200506.zip",
+            "datastore_active": false,
+            "format": "ZIP",
+            "package_id": "0e377f16-95e9-4c15-a1fc-49e06a39cfa0",
+            "created": "2020-05-07T07:37:51.812968",
+            "state": "active",
+            "mimetype_inner": null,
+            "last_modified": "2024-05-08T11:52:07.166219",
+            "position": 0,
+            "revision_id": "dab61692-fa71-4bac-b117-5e68b26f4581",
+            "url_type": "upload",
+            "id": "46a7b674-49f9-4ad6-b778-df48f6736222",
+            "resource_type": null,
+            "size": null
+          },
+          {
+            "mimetype": "application/pdf",
+            "cache_url": null,
+            "name": "GB DNO Licence Areas 20200506",
+            "hash": "",
+            "description": "The GIS boundaries for DNO Licence Areas in PDF format, suitable for print.",
+            "metadata_modified": "2024-11-04T17:09:04.274160",
+            "cache_last_updated": null,
+            "url": "https://api.neso.energy/dataset/0e377f16-95e9-4c15-a1fc-49e06a39cfa0/resource/af79a476-33b0-42a3-8c6d-1c578d844cc3/download/dno_license_areas_20200506.pdf",
+            "datastore_active": false,
+            "format": "PDF",
+            "package_id": "0e377f16-95e9-4c15-a1fc-49e06a39cfa0",
+            "created": "2020-05-07T07:36:19.062770",
+            "state": "active",
+            "mimetype_inner": null,
+            "last_modified": "2024-05-08T11:51:46.035675",
+            "position": 1,
+            "revision_id": "48b5e1e4-167d-49c4-b0e1-ff127eebd166",
+            "url_type": "upload",
+            "id": "af79a476-33b0-42a3-8c6d-1c578d844cc3",
+            "resource_type": null,
+            "size": null
+          },
+          {
+            "mimetype": "application/geo+json",
+            "cache_url": null,
+            "name": "GB DNO Licence Areas 20200506 with GeoJson",
+            "hash": "",
+            "description": "The GIS boundaries for DNO Licence Areas in GeoJSON format. The GeoJSON file uses the following Coordinate Reference System (CRS): EPSG:27700 - OSGB 1936 / British National Grid - Projected.",
+            "metadata_modified": "2025-04-07T15:43:34.847076",
+            "cache_last_updated": null,
+            "url": "https://api.neso.energy/dataset/0e377f16-95e9-4c15-a1fc-49e06a39cfa0/resource/e96db306-aaa8-45be-aecd-65b34d38923a/download/dno_license_areas_20200506.geojson",
+            "datastore_active": false,
+            "format": "GeoJSON",
+            "package_id": "0e377f16-95e9-4c15-a1fc-49e06a39cfa0",
+            "created": "2020-05-07T07:35:19.948050",
+            "state": "active",
+            "mimetype_inner": null,
+            "last_modified": "2024-05-08T11:51:23.868845",
+            "position": 2,
+            "revision_id": "ce838edf-78a5-4f7c-a731-95fb20c144d2",
+            "url_type": "upload",
+            "id": "e96db306-aaa8-45be-aecd-65b34d38923a",
+            "resource_type": null,
+            "size": null
+          },
+          {
+            "mimetype": null,
+            "cache_url": null,
+            "name": "GB DNO Licence Areas 20240503 with ESRI Shape File",
+            "hash": "",
+            "description": "The GIS boundaries for DNO Licence Areas in ESRI Shapefile format. The shapefile uses the following Coordinate Reference System (CRS): EPSG:27700 - OSGB 1936 / British National Grid - Projected.",
+            "metadata_modified": "2024-11-04T17:07:52.584001",
+            "cache_last_updated": null,
+            "url": "https://api.neso.energy/dataset/0e377f16-95e9-4c15-a1fc-49e06a39cfa0/resource/668df251-b8a5-4ac3-8427-20b93b2f5f67/download/gb-dno-license-areas-20240503-as-esri-shape-file.zip",
+            "datastore_active": false,
+            "format": "ZIP",
+            "package_id": "0e377f16-95e9-4c15-a1fc-49e06a39cfa0",
+            "created": "2024-05-08T11:54:50.215729",
+            "state": "active",
+            "mimetype_inner": null,
+            "last_modified": "2024-05-08T11:54:50.115016",
+            "position": 3,
+            "revision_id": "f0f3ea12-6fcc-4f83-96f6-20c12fb1cdf7",
+            "url_type": "upload",
+            "id": "668df251-b8a5-4ac3-8427-20b93b2f5f67",
+            "resource_type": null,
+            "size": null
+          },
+          {
+            "mimetype": null,
+            "cache_url": null,
+            "name": "GB DNO Licence Areas 20240503 with GeoJson",
+            "hash": "",
+            "description": "The GIS boundaries for DNO Licence Areas in GeoJSON format. The GeoJSON file uses the following Coordinate Reference System (CRS): EPSG:27700 - OSGB 1936 / British National Grid - Projected.",
+            "metadata_modified": "2025-03-27T13:23:49.849198",
+            "cache_last_updated": null,
+            "url": "https://api.neso.energy/dataset/0e377f16-95e9-4c15-a1fc-49e06a39cfa0/resource/1c6a7dc0-1b6c-443a-bc67-5f7125649434/download/gb-dno-license-areas-20240503-as-geojson.geojson",
+            "datastore_active": false,
+            "format": "GeoJSON",
+            "package_id": "0e377f16-95e9-4c15-a1fc-49e06a39cfa0",
+            "created": "2024-05-08T11:57:08.563466",
+            "state": "active",
+            "mimetype_inner": null,
+            "last_modified": "2024-05-08T11:57:08.460183",
+            "position": 4,
+            "revision_id": "1c893e15-0b56-4f94-94de-bf048c0b486a",
+            "url_type": "upload",
+            "id": "1c6a7dc0-1b6c-443a-bc67-5f7125649434",
+            "resource_type": null,
+            "size": null
+          },
+          {
+            "mimetype": null,
+            "cache_url": null,
+            "name": "GB DNO Licence Areas 20240503",
+            "hash": "",
+            "description": "The GIS boundaries for DNO Licence Areas in PNG format, suitable for print.",
+            "metadata_modified": "2024-11-04T17:05:34.774047",
+            "cache_last_updated": null,
+            "url": "https://api.neso.energy/dataset/0e377f16-95e9-4c15-a1fc-49e06a39cfa0/resource/26d1b3b3-2ea7-4681-bbd0-8fc7f574c6db/download/gb-dno-license-areas-20240503.png",
+            "datastore_active": false,
+            "format": "PNG",
+            "package_id": "0e377f16-95e9-4c15-a1fc-49e06a39cfa0",
+            "created": "2024-05-24T10:38:52.847253",
+            "state": "active",
+            "mimetype_inner": null,
+            "last_modified": "2024-05-24T10:38:52.719744",
+            "position": 5,
+            "revision_id": "32ba9ec3-984a-44f4-bf7d-dc40dfa2e2c0",
+            "url_type": "upload",
+            "id": "26d1b3b3-2ea7-4681-bbd0-8fc7f574c6db",
+            "resource_type": null,
+            "size": null
+          }
+        ],
+        "num_resources": 6,
+        "tags": [
+          {
+            "vocabulary_id": null,
+            "state": "active",
+            "display_name": "Boundaries",
+            "id": "01162b9d-5576-49e3-8232-70764033d1a8",
+            "name": "Boundaries"
+          },
+          {
+            "vocabulary_id": null,
+            "state": "active",
+            "display_name": "DNO",
+            "id": "5d36bb9b-bccc-4178-8991-20f55afc717d",
+            "name": "DNO"
+          },
+          {
+            "vocabulary_id": null,
+            "state": "active",
+            "display_name": "Demand",
+            "id": "0c8a21fe-b5ef-44dc-a2d7-18497779c439",
+            "name": "Demand"
+          },
+          {
+            "vocabulary_id": null,
+            "state": "active",
+            "display_name": "GIS",
+            "id": "34bb58e7-0283-4d4b-b204-79cd4109e354",
+            "name": "GIS"
+          },
+          {
+            "vocabulary_id": null,
+            "state": "active",
+            "display_name": "GSP",
+            "id": "7755a02d-605c-4c09-84f0-7afa77a7d473",
+            "name": "GSP"
+          },
+          {
+            "vocabulary_id": null,
+            "state": "active",
+            "display_name": "GSP Group",
+            "id": "0a196ff3-afb0-4810-865a-9d6ec86d058a",
+            "name": "GSP Group"
+          },
+          {
+            "vocabulary_id": null,
+            "state": "active",
+            "display_name": "Generation",
+            "id": "87d6fc4f-dce1-4cc2-8858-b9e839301cac",
+            "name": "Generation"
+          },
+          {
+            "vocabulary_id": null,
+            "state": "active",
+            "display_name": "Grid Supply Point",
+            "id": "9ef42d22-5471-411b-b80b-bba444807271",
+            "name": "Grid Supply Point"
+          },
+          {
+            "vocabulary_id": null,
+            "state": "active",
+            "display_name": "Licence Area",
+            "id": "fa7695d6-276f-4060-a3e4-4d63e10cdde5",
+            "name": "Licence Area"
+          },
+          {
+            "vocabulary_id": null,
+            "state": "active",
+            "display_name": "PES",
+            "id": "698e9b1b-c4df-4ce5-bc55-1635d0f03f45",
+            "name": "PES"
+          },
+          {
+            "vocabulary_id": null,
+            "state": "active",
+            "display_name": "Public Electricity Supplier",
+            "id": "0366a104-6f47-4793-b66a-73d66ebc3c58",
+            "name": "Public Electricity Supplier"
+          },
+          {
+            "vocabulary_id": null,
+            "state": "active",
+            "display_name": "Regional",
+            "id": "a856b536-fbd9-4e19-98b1-ab025b1d078b",
+            "name": "Regional"
+          },
+          {
+            "vocabulary_id": null,
+            "state": "active",
+            "display_name": "Shapefile",
+            "id": "fd83f184-1074-4a5d-aa3b-21e0af9e91ba",
+            "name": "Shapefile"
+          },
+          {
+            "vocabulary_id": null,
+            "state": "active",
+            "display_name": "Subscribable",
+            "id": "fb80a4a5-bda6-4679-9c06-4decec4a0917",
+            "name": "Subscribable"
+          }
+        ],
+        "groups": [],
+        "license_id": "ESO",
+        "relationships_as_subject": [],
+        "organization": {
+          "description": "System-wide data including historic system frequency data.",
+          "created": "2019-10-31T14:06:42.313808",
+          "title": "System",
+          "name": "system",
+          "is_organization": true,
+          "state": "active",
+          "image_url": "2024-09-30-082858.986383System.svg",
+          "revision_id": "e599377e-a4c2-4b6d-ac86-a2351a51c288",
+          "type": "organization",
+          "id": "9c4b57c2-99fc-4e99-b33a-9ebea688458c",
+          "approval_status": "approved"
+        },
+        "name": "gis-boundaries-for-gb-dno-license-areas",
+        "isopen": false,
+        "url": "https://www.solar.sheffield.ac.uk/pvlive/regional",
+        "notes": "This dataset contains approximate GIS (geographic information system) geospatial boundaries for each of the DNO Licence Areas in Great Britain. There are 14 licensed Distribution Network Operators (DNOs) in Britain and each is responsible for a regional distribution services area. DNO Licence Areas are sometimes referred to as GSP Groups and historically have also been known as Public Electricity Supplier (PES) regions, though the latter name is no longer widely used. \r\n\r\n<br/>\r\n\r\nThe DNO Licence Area boundaries are unusual because they are only well defined when tested. The boundaries tend to run through rural areas and change over time whenever a new connection is added close to a boundary. For example, a new connection close to an existing boundary can approach the DNO responsible for both neighbouring Licence Areas to ask for a connection, and is free to choose either depending on how much they will charge - once the new connection is made the boundary is, theoretically, re-drawn to ensure that the new connection falls into the correct Licence Area. The boundaries in this dataset were originally shared by Western Power Distribution, now National Grid Electricity Distribution (the DNO responsible for 4 of the 14 Licence Areas) and come with the disclaimer that they are probably a little outdated and not 100% accurate. That said, they are a good indication of the geography of DNO Licence Areas.\r\n\r\n<br/>\r\n\r\nDNO Licence Areas are widely used as an aggregation entity when reporting electricity network data, for example, in Elexon's publication of electricity settlement data. As such, they are also useful for regional modelling of the GB electricity transmission network, for example to aggregate distributed embedded generator energy flows onto the transmission network. A good example of this is the Regional PV_Live outturn estimates published by The University of Sheffield (https://www.solar.sheffield.ac.uk/pvlive/regional/). <br/><br/>",
+        "owner_org": "9c4b57c2-99fc-4e99-b33a-9ebea688458c",
+        "extras": [
+          {
+            "key": "Update Frequency",
+            "value": "Ad hoc"
+          }
+        ],
+        "license_url": "https://www.neso.energy/data-portal/ngeso-open-licence",
+        "title": "GIS Boundaries for GB DNO Licence Areas",
+        "revision_id": "3e6600ab-9705-4315-9c30-0132ad09aa1f"
+      }
+    ],
+    "search_facets": {}
+  }
+}

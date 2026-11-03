@@ -1,0 +1,9 @@
+[package]
+name = "unicode-ident"
+version = "1.0.27"
+edition = "2021"
+license = "MIT"
+description = "Local compatibility adapter using the MIT/Apache Unicode XID implementation"
+
+[dependencies]
+unicode-xid = "0.2.6"

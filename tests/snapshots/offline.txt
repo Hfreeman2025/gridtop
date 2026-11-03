@@ -1,0 +1,32 @@
+                                                                                                    
+   gridtop   /   Regional generation.                                  Generation / forecast        
+                                                                                                    
+   ──────────────────────────────────────────────────────────────────────────────────────────────   
+                                                                                                    
+                                                                                                    
+   OFFLINE                                                                                          
+                                                                                                    
+   Screenshot fixture: request timed out. No live data received.                                    
+                                                                                                    
+   No reading available. Retry with r, or run gridtop --demo                                        
+   for the explicitly labelled 1 Nov 2026 recording.                                                
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+   r  retry     ?  help     q  quit                                                                 
+                                                                                                    

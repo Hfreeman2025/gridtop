@@ -1,0 +1,35 @@
+name: Rust checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Rust toolchain
+        run: rustup toolchain install 1.94.0 --profile minimal --component rustfmt --component clippy
+      - name: Select toolchain
+        run: rustup default 1.94.0
+      - name: Fetch locked dependencies
+        run: cargo fetch --locked
+      - name: Format
+        run: cargo fmt --check
+      - name: Clippy
+        run: cargo clippy --locked --all-targets -- -D warnings
+      - name: Test
+        run: cargo test --locked
+      - name: Dependency licence gate
+        run: python3 scripts/check_licenses.py
+      - name: Release and terminal probes
+        run: cargo build --release --locked --examples --bin gridtop
+      - name: Terminal lifecycle
+        run: python3 scripts/pty_check.py
+      - name: Carbon-aware runner lifecycle (offline, controlling PTY)
+        run: python3 scripts/runner-native.py --lifecycle-only
