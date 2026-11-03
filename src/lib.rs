@@ -12,4 +12,5 @@ pub mod runner;
 pub mod schedule;
 pub mod signals;
 pub mod theme;
+mod typography;
 pub mod ui;

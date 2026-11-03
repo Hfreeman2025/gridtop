@@ -6,3 +6,4 @@ tests/snapshots/*.txt -text whitespace=-blank-at-eol,-blank-at-eof
 tests/fixtures/** -text whitespace=-blank-at-eol,-blank-at-eof
 data/** -text
 data/boundary-licence.html whitespace=-blank-at-eol,-blank-at-eof
+fonts/OFL.txt whitespace=-blank-at-eof

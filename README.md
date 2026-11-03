@@ -200,7 +200,7 @@ cargo run --release --locked --example runner-bench
 
 CI checks Linux and macOS without live API calls or publishing. It is authored locally; remote CI has not been dispatched. Development builds disable incremental debug artifacts to keep rebuildable cache size modest.
 
-`shots/v2/` contains two visual critique passes at **1440×900** and **390×844**, an actual terminal recording, lifecycle checks, browser reports and native rendering measurements. [CRITIQUE.md](shots/v2/CRITIQUE.md) records defects found and changes made. The screenshots render exact ratatui cells through local HTML; they are not a separate web implementation. Actual interaction and cleanup are checked independently with `TestBackend`, mouse/keyboard events and native pseudo terminals.
+`shots/v2/` contains two visual critique passes at **1440×900** and **390×844**, an actual terminal recording, lifecycle checks, browser reports and native rendering measurements. [CRITIQUE.md](shots/v2/CRITIQUE.md) records defects found and changes made. The screenshots render ratatui content and colours through local HTML, with Plex roles for prose and signs. They are not a separate web implementation. Actual interaction and cleanup are checked independently with `TestBackend`, mouse/keyboard events and native pseudo terminals.
 
 The optional screenshot harness uses only the installed Playwright package explicitly permitted by the brief. Browser downloads may be kept under `.tmp/browsers`; no application code from another project is read or reused:
 
@@ -209,6 +209,31 @@ node scripts/v2-screenshots.mjs chromium pass-2
 PLAYWRIGHT_BROWSERS_PATH="$PWD/.tmp/browsers" node scripts/v2-screenshots.mjs webkit pass-2
 PLAYWRIGHT_BROWSERS_PATH="$PWD/.tmp/browsers" node scripts/v2-screenshots.mjs firefox pass-2
 ```
+
+Typography now follows the shared **IBM Plex** family: Sans for reading/interface text,
+Mono for data/code/records, and Sans Condensed for the wordmark and labels. The optional HTML
+capture surface embeds the eight local WOFF2 faces from `fonts/` (165,476 bytes before embedding),
+uses `font-display: swap`, and preloads three main faces. Its cell geometry stays fixed during a
+font swap. There are no runtime font requests. See [FONT-LICENCES.md](FONT-LICENCES.md) and
+[DONE-PLEX.md](DONE-PLEX.md) for provenance, layout measurements and before/after evidence.
+
+To regenerate the current Plex evidence, run the three galleries with an explicit output folder,
+then the browser harness. Coordinate the shared browser slot first; the harness also refuses to
+launch while an automated browser engine is visible in `ps`.
+
+```sh
+cargo run --locked --example runner-gallery -- plex shots/plex/after/runner
+cargo run --locked --example v2-gallery -- plex shots/plex/after/map
+cargo run --locked --example v2_1-gallery -- plex shots/plex/after/themes
+python3 scripts/check-plex.py
+node scripts/plex-screenshots.mjs chromium
+PLAYWRIGHT_BROWSERS_PATH="$PWD/.tmp/browsers" node scripts/plex-screenshots.mjs webkit
+PLAYWRIGHT_BROWSERS_PATH="$PWD/.tmp/browsers" node scripts/plex-screenshots.mjs firefox
+```
+
+The native TUI uses the terminal emulator's configured font. Select **IBM Plex Mono regular 400
+and bold 600** there to match the data typography; gridtop cannot set the host's font or mix Sans
+and Condensed inside a terminal. No global font installation or terminal setting is changed.
 
 The capture pages ship **zero JavaScript**. Their browser checks establish correct evidence rendering, not native TUI compatibility with browsers. `og.png` is a 1200×630 capture of the real runner using the dated public forecast. `favicon.svg` is generated from the same boundary raster. Nothing is served or published. Full results, performance numbers and remaining weaknesses are in [DONE-V2.md](DONE-V2.md).
 
@@ -238,6 +263,8 @@ Cleanest 2h  Mon 04:00–06:00 UTC  49 g/kWh
 ## Credits and licences
 
 Personal project by Harry Freeman. Code: [MIT](LICENSE), Copyright (c) 2026 Harry Freeman.
+
+Typography: IBM Plex, @fontsource 5.3.0, **SIL OFL 1.1**. Vendored local latin WOFF2 files, full notices and hashes: [FONT-LICENCES.md](FONT-LICENCES.md).
 
 Electricity data: **National Grid ESO / NESO Carbon Intensity API**, [api.carbonintensity.org.uk](https://api.carbonintensity.org.uk/), **[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)**. The API root declares that licence. Recorded responses are unmodified; charts, window averages and map colouring are gridtop’s transformations, without provider endorsement.
 

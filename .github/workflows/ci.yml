@@ -27,6 +27,8 @@ jobs:
         run: cargo test --locked
       - name: Dependency licence gate
         run: python3 scripts/check_licenses.py
+      - name: Pinned fonts and unchanged capture data
+        run: python3 scripts/check-plex.py
       - name: Release and terminal probes
         run: cargo build --release --locked --examples --bin gridtop
       - name: Terminal lifecycle

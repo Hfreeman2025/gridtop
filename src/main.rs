@@ -80,7 +80,7 @@ enum Action {
     },
     /// Hold a command, then spawn it directly, preserving its exit code.
     Wait(Wait),
-    /// Save an exact terminal rendering as local HTML plus a plain-text capture.
+    /// Save terminal cells as local Plex HTML plus an exact plain-text capture.
     Capture {
         #[arg(long,default_value_t=120,value_parser=clap::value_parser!(u16).range(28..=240))]
         width: u16,
