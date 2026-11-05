@@ -22,7 +22,7 @@ coverage/
 __pycache__/
 *.py[cod]
 
-# Local browser profiles and reports; curated product captures in shots/ are intentional
+# Local browser profiles and generated verification output
 browser-profiles/
 playwright-*-profile*/
 playwright_*profile*/
@@ -90,3 +90,19 @@ weights/
 ._*
 /.idea/
 /.vscode/
+
+# Generated captures are not documentation assets.
+# Preserve the capture CLI’s default output directory, not its generated files.
+shots/*
+!shots/.gitkeep
+*.ansi
+*.cast
+
+# Local agent instructions and round reports are not public documentation.
+/AGENTS.md
+/CLAUDE.md
+/SPEC.md
+/BRIEF.md
+/V2.md
+/V3.md
+/DONE-*.md

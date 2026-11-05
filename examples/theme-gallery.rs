@@ -2,10 +2,9 @@ use gridtop::{capture, theme::Theme, ui::View};
 use std::path::Path;
 
 fn main() -> anyhow::Result<()> {
-    let pass = std::env::args().nth(1).unwrap_or_else(|| "pass-1".into());
     let dir = std::env::args()
-        .nth(2)
-        .unwrap_or_else(|| format!("shots/v2.1/{pass}"));
+        .nth(1)
+        .unwrap_or_else(|| ".tmp/captures/themes".into());
     std::fs::create_dir_all(&dir)?;
     for (size, w, h) in [("wide", 164, 50), ("compact", 80, 24), ("phone", 44, 48)] {
         for (name, theme) in [

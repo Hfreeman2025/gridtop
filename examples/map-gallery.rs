@@ -5,10 +5,9 @@ use gridtop::{
 };
 use std::path::Path;
 fn main() -> anyhow::Result<()> {
-    let pass = std::env::args().nth(1).unwrap_or_else(|| "pass-1".into());
     let dir = std::env::args()
-        .nth(2)
-        .unwrap_or_else(|| format!("shots/v2/{pass}"));
+        .nth(1)
+        .unwrap_or_else(|| ".tmp/captures/map".into());
     std::fs::create_dir_all(&dir)?;
     for (size, w, h) in [("desktop", 164, 50), ("phone", 44, 48)] {
         for state in [
@@ -75,20 +74,11 @@ fn main() -> anyhow::Result<()> {
             capture::save(&v, w, h, Path::new(&format!("{dir}/{state}-{size}.html")))?;
         }
     }
-    std::fs::write(
-        "favicon.svg",
-        include_str!(concat!(env!("OUT_DIR"), "/favicon.svg")),
-    )?;
     let v = View::recorded()?;
-    let og_name = if std::env::args().nth(2).is_some() {
-        "map-og.html"
-    } else {
-        "og.html"
-    };
     let og_path = Path::new(&dir)
         .parent()
-        .unwrap_or(Path::new("shots/v2"))
-        .join(og_name);
+        .unwrap_or(Path::new(".tmp/captures"))
+        .join("map-og.html");
     capture::save(&v, 140, 34, &og_path)?;
     println!("{dir}: 30 state captures");
     Ok(())

@@ -1,16 +1,18 @@
-name: Rust checks
+name: Checks
 on:
   push:
   pull_request:
 permissions:
   contents: read
 jobs:
-  check:
+  rust:
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
+    env:
+      CARGO_BUILD_JOBS: 2
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
       - name: Rust toolchain
@@ -21,17 +23,64 @@ jobs:
         run: cargo fetch --locked
       - name: Format
         run: cargo fmt --check
+      - name: Typecheck
+        run: cargo check --locked --all-targets
       - name: Clippy
         run: cargo clippy --locked --all-targets -- -D warnings
       - name: Test
         run: cargo test --locked
-      - name: Dependency licence gate
-        run: python3 scripts/check_licenses.py
-      - name: Pinned fonts and unchanged capture data
-        run: python3 scripts/check-plex.py
+      - name: Licences and pinned fonts
+        run: |
+          python3 scripts/check_licenses.py
+          python3 scripts/check_fonts.py
       - name: Release and terminal probes
         run: cargo build --release --locked --examples --bin gridtop
-      - name: Terminal lifecycle
-        run: python3 scripts/pty_check.py
-      - name: Carbon-aware runner lifecycle (offline, controlling PTY)
-        run: python3 scripts/runner-native.py --lifecycle-only
+      - name: Native terminal lifecycle
+        run: |
+          python3 scripts/pty_check.py
+          python3 scripts/runner-native.py --lifecycle-only
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Install advisory checker
+        run: cargo install cargo-audit --version 0.22.2 --locked
+      - name: RustSec lockfile audit
+        run: cargo audit
+  exports:
+    runs-on: ubuntu-latest
+    env:
+      CARGO_BUILD_JOBS: 2
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Rust toolchain
+        run: |
+          rustup toolchain install 1.94.0 --profile minimal
+          rustup default 1.94.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: "22"
+      - name: JavaScript tooling
+        run: npm ci
+      - name: JavaScript dependency audit
+        run: npm audit --audit-level=high
+      - name: Format
+        run: npm run format:check
+      - name: Python formatting
+        run: |
+          python3 -m venv .tmp/check-tools
+          .tmp/check-tools/bin/pip install ruff==0.14.3
+          .tmp/check-tools/bin/ruff format --check scripts
+          .tmp/check-tools/bin/ruff check scripts
+      - name: Browser dependencies
+        run: npx playwright install --with-deps chromium webkit firefox
+      - name: Generate offline exports
+        run: |
+          cargo run --locked --example runner-gallery
+          cargo run --locked --example map-gallery
+          cargo run --locked --example theme-gallery
+      - name: Serial Chromium, WebKit and Firefox checks
+        run: |
+          npm run check:browser -- chromium
+          npm run check:browser -- webkit
+          npm run check:browser -- firefox

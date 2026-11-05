@@ -1,82 +1,19 @@
-//! Countdown instrumentation. It never owns or launches a command.
-use crate::{
-    carbon::Plan,
-    geography,
-    landscape::{BG, GOLD, GREEN, INK, MUTED, RULE, RUST},
-    theme::Theme,
-    ui::telemetry::bars,
-};
-use anyhow::Result;
-use chrono::{DateTime, Utc};
-use crossterm::{
-    cursor::{Hide, Show},
-    execute,
-    style::ResetColor,
-    terminal::{
-        BeginSynchronizedUpdate, EndSynchronizedUpdate, EnterAlternateScreen, LeaveAlternateScreen,
-    },
-};
+use super::{Panel, Phase, safe_text};
+use crate::landscape::{BG, GOLD, GREEN, INK, MUTED, RULE, RUST};
 use ratatui::{
-    Frame, Terminal,
-    backend::CrosstermBackend,
+    Frame,
     layout::Rect,
-    style::{Color, Modifier, Style},
+    style::{Color, Style},
     widgets::{Paragraph, Wrap},
 };
-use std::io::{self, IsTerminal};
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub enum Phase {
-    Loading,
-    Waiting,
-    Preview,
-    Starting,
-    Running,
-    Completed,
-    Cancelled,
-    Error,
-    Fallback,
-}
-#[derive(Clone)]
-pub struct Panel {
-    pub plan: Option<Plan>,
-    pub now: DateTime<Utc>,
-    pub phase: Phase,
-    pub command: String,
-    pub message: String,
-    pub theme: Theme,
-}
-impl Panel {
-    pub fn new(command: String, theme: Theme) -> Self {
-        Self {
-            plan: None,
-            now: Utc::now(),
-            phase: Phase::Loading,
-            command,
-            message: "Fetching a regional forecast. No command has started.".into(),
-            theme,
-        }
-    }
-}
-fn row(f: &mut Frame, x: u16, y: u16, w: u16, text: impl Into<String>, color: Color) {
+pub(super) fn row(f: &mut Frame, x: u16, y: u16, w: u16, text: impl Into<String>, color: Color) {
     if y < f.area().bottom() {
         f.render_widget(
             Paragraph::new(text.into()).style(Style::default().fg(color).bg(BG)),
             Rect::new(x, y, w, 1),
         );
     }
-}
-pub fn safe_text(s: &str) -> String {
-    s.chars()
-        .flat_map(|c| {
-            if c.is_control() {
-                c.escape_default().collect::<Vec<_>>()
-            } else {
-                vec![c]
-            }
-        })
-        .take(300)
-        .collect()
 }
 fn command_lines(text: &str, width: usize) -> [String; 2] {
     let mut lines = [String::new(), String::new()];
@@ -380,75 +317,7 @@ pub fn render(f: &mut Frame, p: &Panel) {
         },
         MUTED,
     );
-    let chart_y = a.y + 16;
-    let chart_h = a.height.saturating_sub(21).clamp(1, 15);
-    let max = plan
-        .forecast
-        .iter()
-        .map(|v| v.intensity.forecast)
-        .max()
-        .unwrap_or(1);
-    let ceiling = (f64::from(max) / 100.).ceil().max(1.) * 100.;
-    row(
-        f,
-        x,
-        chart_y - 2,
-        w,
-        if narrow {
-            format!("48h forecast · 0–{} g/kWh", ceiling as u16)
-        } else {
-            format!(
-                "48h forecast · 0–{} g/kWh · bracket = chosen runtime",
-                ceiling as u16
-            )
-        },
-        MUTED,
-    );
-    let values: Vec<_> = plan.forecast.iter().map(|v| v.intensity.forecast).collect();
-    let glyphs = bars(&values, w as usize, chart_h as usize, ceiling);
-    let mut marked = Vec::new();
-    for col in 0..usize::from(w) {
-        let from = col * values.len() / usize::from(w);
-        let to = ((col + 1) * values.len() / usize::from(w))
-            .max(from + 1)
-            .min(values.len());
-        if from >= to {
-            continue;
-        }
-        let slots = &plan.forecast[from..to];
-        let peak = slots.iter().max_by_key(|s| s.intensity.forecast).unwrap();
-        let chosen = slots
-            .iter()
-            .any(|s| s.from < plan.chosen.to && s.to > plan.chosen.from);
-        if chosen {
-            marked.push(col as u16);
-        }
-        for yy in 0..chart_h {
-            f.buffer_mut()[(x + col as u16, chart_y + yy)]
-                .set_symbol(&glyphs[usize::from(yy) * usize::from(w) + col].to_string())
-                .set_fg(geography::band_color(peak.intensity.index))
-                .set_bg(if chosen { Color::Rgb(27, 39, 25) } else { BG });
-        }
-    }
-    if let (Some(first), Some(last)) = (marked.first(), marked.last()) {
-        for col in &marked {
-            let symbol = if first == last {
-                "▼"
-            } else if col == first {
-                "┏"
-            } else if col == last {
-                "┓"
-            } else {
-                "━"
-            };
-            f.buffer_mut()[(x + col, chart_y - 1)]
-                .set_symbol(symbol)
-                .set_fg(GREEN)
-                .set_bg(BG)
-                .set_style(Style::default().add_modifier(Modifier::BOLD));
-        }
-    }
-    let end = chart_y + chart_h;
+    let end = super::chart::forecast(f, plan, x, w, narrow);
     row(
         f,
         x,
@@ -589,55 +458,4 @@ fn digits(s: &str) -> Vec<String> {
                 .join(" ")
         })
         .collect()
-}
-
-pub struct Display {
-    terminal: Option<Terminal<CrosstermBackend<io::Stderr>>>,
-    entered: bool,
-}
-impl Display {
-    pub fn enabled(&self) -> bool {
-        self.terminal.is_some()
-    }
-    pub fn disabled() -> Self {
-        Self {
-            terminal: None,
-            entered: false,
-        }
-    }
-    pub fn new() -> Result<Self> {
-        if !io::stderr().is_terminal() {
-            return Ok(Self::disabled());
-        }
-        let mut stderr = io::stderr();
-        let mut display = Self {
-            terminal: None,
-            entered: true,
-        };
-        execute!(stderr, EnterAlternateScreen, Hide)?;
-        display.terminal = Some(Terminal::new(CrosstermBackend::new(stderr))?);
-        Ok(display)
-    }
-    pub fn draw(&mut self, p: &Panel) -> Result<()> {
-        if let Some(t) = &mut self.terminal {
-            execute!(t.backend_mut(), BeginSynchronizedUpdate)?;
-            let result = t.draw(|f| render(f, p)).map(|_| ());
-            execute!(t.backend_mut(), EndSynchronizedUpdate)?;
-            result?;
-        }
-        Ok(())
-    }
-}
-impl Drop for Display {
-    fn drop(&mut self) {
-        if self.entered {
-            let _ = execute!(
-                io::stderr(),
-                EndSynchronizedUpdate,
-                ResetColor,
-                Show,
-                LeaveAlternateScreen
-            );
-        }
-    }
 }

@@ -1,0 +1,21 @@
+{
+  "name": "gridtop-checks",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local screenshot and formatting checks for the gridtop Rust application",
+  "author": "Harry Freeman",
+  "license": "MIT",
+  "repository": "https://github.com/Hfreeman2025/gridtop",
+  "scripts": {
+    "format": "prettier --write scripts/*.mjs package.json '*.md' 'docs/*.md' .github/workflows/ci.yml",
+    "format:check": "prettier --check scripts/*.mjs package.json '*.md' 'docs/*.md' .github/workflows/ci.yml",
+    "check:browser": "node scripts/browser-check.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0",
+    "prettier": "3.6.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

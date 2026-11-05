@@ -9,7 +9,7 @@ The API root page directly declares CC BY 4.0. No account, personal postcode or 
 - `generation.json`: `/generation`, national generation mix for 10:00–10:30 UTC.
 - `forecast.json`: `/intensity/{retrieval UTC datetime}/fw48h`, starts 10:30 UTC.
 - `regional.json`: `/regional/intensity/{retrieval UTC datetime}/fw48h/regionid/13`, London.
-- `postcode.json`: `/regional/postcode/SW1A`, the public outward code used by the brief's SW1 example.
+- `postcode.json`: `/regional/postcode/SW1A`, the public outward code used by the SW1 example.
 - `provenance.json`: local file-save timestamps from the retrieval, preserved as a manifest.
 
 Payloads are unmodified public API responses. Settlement times are authoritative; the save

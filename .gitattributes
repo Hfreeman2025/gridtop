@@ -1,7 +1,4 @@
-# Fixed-width terminal captures and archived evidence must retain their exact bytes.
-shots/** -text
-shots/**/*.ansi -diff -merge
-shots/**/*.txt whitespace=-blank-at-eol,-blank-at-eof
+# Preserve terminal snapshots and upstream data bytes.
 tests/snapshots/*.txt -text whitespace=-blank-at-eol,-blank-at-eof
 tests/fixtures/** -text whitespace=-blank-at-eol,-blank-at-eof
 data/** -text

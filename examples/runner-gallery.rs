@@ -9,10 +9,9 @@ use gridtop::{
 };
 use std::path::Path;
 fn main() -> anyhow::Result<()> {
-    let pass = std::env::args().nth(1).unwrap_or_else(|| "pass-1".into());
     let dir = std::env::args()
-        .nth(2)
-        .unwrap_or_else(|| format!("shots/v3/{pass}"));
+        .nth(1)
+        .unwrap_or_else(|| ".tmp/captures/runner".into());
     std::fs::create_dir_all(&dir)?;
     let r = carbon_cli::recording(&Location::Region(13))?;
     let plan = Plan::new(
@@ -89,7 +88,7 @@ fn main() -> anyhow::Result<()> {
     og.message = "Recorded clock replay · Ctrl-C exits · command never starts".into();
     let og_path = Path::new(&dir)
         .parent()
-        .unwrap_or(Path::new("shots/v3"))
+        .unwrap_or(Path::new(".tmp/captures"))
         .join("og.html");
     capture::save_frame(140, 34, og.theme, &og_path, |f| run_ui::render(f, &og))?;
     println!("{dir}: 42 runner state captures");
