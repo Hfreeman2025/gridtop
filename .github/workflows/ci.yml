@@ -85,7 +85,7 @@ jobs:
       - name: Serial Chromium, WebKit and Firefox checks
         timeout-minutes: 10
         run: |
-          docker run --rm --init --ipc=host --network none \
+          docker run --rm --init --ipc=host --network none --env DEBUG=pw:browser \
             --volume "$PWD:/work" --workdir /work \
             "$PLAYWRIGHT_IMAGE" bash -euc '
               npm run check:browser -- chromium
