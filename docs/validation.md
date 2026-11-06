@@ -53,6 +53,13 @@ npm run check:browser -- webkit
 npm run check:browser -- firefox
 ```
 
+GitHub Actions runs these same three commands serially in the official Playwright
+1.63.0 Noble image, pinned by digest and matched to `package-lock.json`. The image provides
+the browsers and OS libraries; npm still installs the locked JavaScript tooling. This avoids
+reinstalling browser libraries from the hosted runner’s apt mirror. The browser container
+has networking disabled; Rust checks continue on both Linux and macOS. See
+[Playwright’s container guidance](https://playwright.dev/docs/docker).
+
 Run one browser engine at a time. The harness refuses to launch while another automated
 engine is present. It blocks external requests and live media, uses an offline audio context,
 and keeps fresh profiles and reports in ignored `.tmp/` folders. No user browser profile is read.

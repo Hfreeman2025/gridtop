@@ -51,6 +51,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CARGO_BUILD_JOBS: 2
+      # Match package-lock.json; the image supplies browsers and their OS libraries.
+      PLAYWRIGHT_IMAGE: mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
       - name: Rust toolchain
@@ -72,15 +74,21 @@ jobs:
           .tmp/check-tools/bin/pip install ruff==0.14.3
           .tmp/check-tools/bin/ruff format --check scripts
           .tmp/check-tools/bin/ruff check scripts
-      - name: Browser dependencies
-        run: npx playwright install --with-deps chromium webkit firefox
+      - name: Browser runtime
+        timeout-minutes: 10
+        run: docker pull "$PLAYWRIGHT_IMAGE"
       - name: Generate offline exports
         run: |
           cargo run --locked --example runner-gallery
           cargo run --locked --example map-gallery
           cargo run --locked --example theme-gallery
       - name: Serial Chromium, WebKit and Firefox checks
+        timeout-minutes: 10
         run: |
-          npm run check:browser -- chromium
-          npm run check:browser -- webkit
-          npm run check:browser -- firefox
+          docker run --rm --init --ipc=host --network none \
+            --volume "$PWD:/work" --workdir /work \
+            "$PLAYWRIGHT_IMAGE" bash -euc '
+              npm run check:browser -- chromium
+              npm run check:browser -- webkit
+              npm run check:browser -- firefox
+            '
