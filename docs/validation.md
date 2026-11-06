@@ -71,6 +71,10 @@ long commands/region names, cancelled and dry-run states, help, all three themes
 all three Plex families, and cell boxes during a forced fallback-to-Plex swap. Chromium’s
 PerformanceObserver supplies CLS; an unavailable API is reported as unavailable rather than zero.
 
+The selected-window bracket is drawn with CSS strokes in the HTML export: its box-drawing
+glyphs are outside the self-hosted latin font subset, and system-font substitution can
+otherwise change their text bounds. The original glyphs remain in the plain-text capture.
+
 Capture pages contain no JavaScript. The harness injects its probes only for verification.
 These checks establish export rendering; the separate pseudo-terminal cases establish native
 input, signals and cleanup.

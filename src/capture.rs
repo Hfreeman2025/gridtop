@@ -39,8 +39,10 @@ pub fn save_frame(
     terminal.draw(draw)?;
     let buffer = terminal.backend().buffer();
     let mut html = String::from(
-        "<!doctype html><html lang=\"en\"><meta charset=\"utf-8\"><title>gridtop · terminal capture</title><style>:root{--cell-width:8.43px;--cell-height:17px}html{background:#111915;color:#ebe7d4}body{margin:0;padding:24px;width:max-content}pre{font:400 14px/17px var(--font-data);margin:0;white-space:pre;font-variant-ligatures:none;font-synthesis:none}pre span{display:inline-block;width:var(--cell-width);height:var(--cell-height);overflow:hidden;vertical-align:top}pre .reading{font-family:var(--font-reading)}pre .sign{font-family:var(--font-sign);font-weight:600}*{box-sizing:border-box}</style><pre aria-label=\"gridtop terminal capture\">",
+        "<!doctype html><html lang=\"en\"><meta charset=\"utf-8\"><title>gridtop · terminal capture</title><style>:root{--cell-width:8.43px;--cell-height:17px}html{background:#111915;color:#ebe7d4}body{margin:0;padding:24px;width:max-content}pre{font:400 14px/17px var(--font-data);margin:0;white-space:pre;font-variant-ligatures:none;font-synthesis:none}pre span{display:inline-block;width:var(--cell-width);height:var(--cell-height);overflow:hidden;vertical-align:top}pre .reading{font-family:var(--font-reading)}pre .sign{font-family:var(--font-sign);font-weight:600}*{box-sizing:border-box}",
     );
+    html.push_str(include_str!("capture-strokes.css"));
+    html.push_str("</style><pre aria-label=\"gridtop terminal capture\">");
     html = html.replace("<title>", &format!("{}<title>", &*crate::typography::HEAD));
     let background = css(theme.color(crate::landscape::BG));
     html = html.replace("#111915", &background);
@@ -91,6 +93,12 @@ pub fn save_frame(
                 }
             }
             let text: String = (x..end).map(|col| buffer[(col, y)].symbol()).collect();
+            let stroke = match text.as_str() {
+                "┏" => " stroke stroke-left",
+                "━" => " stroke",
+                "┓" => " stroke stroke-right",
+                _ => "",
+            };
             let (fg, bg) = if cell.modifier.contains(Modifier::REVERSED) {
                 (cell.bg, cell.fg)
             } else {
@@ -98,8 +106,9 @@ pub fn save_frame(
             };
             write!(
                 html,
-                "<span class=\"{}\" style=\"width:calc(var(--cell-width) * {});color:{};background:{};{}{}\">{}</span>",
+                "<span class=\"{}{}\" style=\"width:calc(var(--cell-width) * {});color:{};background:{};{}{}\">{}</span>",
                 role.class(),
+                stroke,
                 end - x,
                 css(fg),
                 css(bg),

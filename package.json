@@ -7,8 +7,8 @@
   "license": "MIT",
   "repository": "https://github.com/Hfreeman2025/gridtop",
   "scripts": {
-    "format": "prettier --write scripts/*.mjs package.json '*.md' 'docs/*.md' .github/workflows/ci.yml",
-    "format:check": "prettier --check scripts/*.mjs package.json '*.md' 'docs/*.md' .github/workflows/ci.yml",
+    "format": "prettier --write scripts/*.mjs src/capture-strokes.css package.json '*.md' 'docs/*.md' .github/workflows/ci.yml",
+    "format:check": "prettier --check scripts/*.mjs src/capture-strokes.css package.json '*.md' 'docs/*.md' .github/workflows/ci.yml",
     "check:browser": "node scripts/browser-check.mjs"
   },
   "devDependencies": {

@@ -95,3 +95,17 @@ jobs:
               done
               exit "$failed"
             '
+      - name: Browser reports and selected captures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: browser-exports
+          retention-days: 3
+          include-hidden-files: true
+          if-no-files-found: error
+          path: |
+            .tmp/browser-report-*.json
+            .tmp/captures/runner/preview-wide*.png
+            .tmp/captures/runner/mono-compact*.png
+            .tmp/captures/map/map-phone*.png
+            .tmp/captures/map/map-desktop*.png
