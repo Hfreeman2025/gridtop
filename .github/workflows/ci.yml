@@ -86,6 +86,7 @@ jobs:
         timeout-minutes: 10
         run: |
           docker run --rm --init --ipc=host --network none --env DEBUG=pw:browser \
+            --user "$(id -u):$(id -g)" \
             --volume "$PWD:/work" --workdir /work \
             "$PLAYWRIGHT_IMAGE" bash -euc '
               npm run check:browser -- chromium

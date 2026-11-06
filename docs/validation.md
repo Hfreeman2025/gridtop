@@ -1,7 +1,7 @@
 # Validation
 
 The application targets macOS and Linux with Rust 1.94.0 or newer. Local results are
-reported separately from GitHub Actions, which has not been dispatched from this checkout.
+reported separately from the Linux and macOS checks in [GitHub Actions](https://github.com/Hfreeman2025/gridtop/actions/workflows/ci.yml).
 
 ## Reproduce
 
@@ -57,7 +57,8 @@ GitHub Actions runs these same three commands serially in the official Playwrigh
 1.63.0 Noble image, pinned by digest and matched to `package-lock.json`. The image provides
 the browsers and OS libraries; npm still installs the locked JavaScript tooling. This avoids
 reinstalling browser libraries from the hosted runner’s apt mirror. The browser container
-has networking disabled; Rust checks continue on both Linux and macOS. See
+has networking disabled and runs as the checkout owner so browser temporary files remain
+writable; Rust checks continue on both Linux and macOS. See
 [Playwright’s container guidance](https://playwright.dev/docs/docker).
 
 Run one browser engine at a time. The harness refuses to launch while another automated
