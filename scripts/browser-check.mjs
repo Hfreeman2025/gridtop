@@ -56,6 +56,13 @@ function silentAndMeasured() {
           window.captureCLS.entries.push({
             value: entry.value,
             time: entry.startTime,
+            sources: entry.sources.map((source) => ({
+              node: source.node?.nodeName,
+              className: source.node?.parentElement?.className,
+              text: source.node?.textContent?.slice(0, 48),
+              before: source.previousRect.toJSON(),
+              after: source.currentRect.toJSON(),
+            })),
           });
         }
     }).observe({ type: "layout-shift", buffered: true });

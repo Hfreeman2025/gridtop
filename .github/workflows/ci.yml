@@ -89,7 +89,9 @@ jobs:
             --user "$(id -u):$(id -g)" \
             --volume "$PWD:/work" --workdir /work \
             "$PLAYWRIGHT_IMAGE" bash -euc '
-              npm run check:browser -- chromium
-              npm run check:browser -- webkit
-              npm run check:browser -- firefox
+              failed=0
+              for engine in chromium webkit firefox; do
+                npm run check:browser -- "$engine" || failed=1
+              done
+              exit "$failed"
             '
